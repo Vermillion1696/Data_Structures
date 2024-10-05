@@ -5,17 +5,29 @@
 using namespace std;
 
 // These functions are related to constructors and destructors.
-MyStringVector::MyStringVector() : data(nullptr), capacity(0), size(0) {}
-MyStringVector::MyStringVector(const size_t capacity) : data(new string[capacity]), capacity(capacity), size(0) {}
+MyStringVector::MyStringVector() {
+    // Precondition: sufficient memory is available
+    // Postcondition: capacity is set to 0, size is set to 0, data is set to nullptr
+    data = nullptr;
+    capacity = 0;
+    size = 0;
+}
+MyStringVector::MyStringVector(const size_t capacity) {
+    // Precondition: sufficient memory is available, capacity >= 0
+    // Postcondition: capacity is set to the given value, size is set to 0, data is allocated
+    data = new string[capacity];
+    this->capacity = capacity;
+    size = 0;
+}
 MyStringVector::MyStringVector(const MyStringVector& other) : data(new string[other.capacity]), capacity(other.capacity), size(other.size) {
-	// Precondition: other.capacity >= 0, other.size <= other.capacity
+	// Precondition: sufficient memory is available, other.capacity >= 0, other.size <= other.capacity
 	// Postcondition: this->data is a deep copy of other's data
 	for (size_t i = 0; i < size; ++i) {
 		data[i] = other.data[i];
 	}
 }
 MyStringVector::~MyStringVector() {
-	// Precondition: none
+	// Precondition: constructor has been called
 	// Postcondition: memory allocated for data is released
 	delete[] data;
 	return;
@@ -132,8 +144,8 @@ const string& MyStringVector::operator[](size_t index) const {
 }
 
 MyStringVector& MyStringVector::operator=(const MyStringVector& other) {
-	// Precondition: none
-	// Postcondition: this vector is a deep copy of other
+	// Precondition: other is a valid MyStringVector object, does not point to this, sufficient memory is available 
+	// Postcondition: this vector is a deep copy of other, freeing any memory previously allocated, if this == &other, no change
 	if (this != &other) {
 		delete[] data;
 		data = new string[other.capacity];
@@ -147,8 +159,8 @@ MyStringVector& MyStringVector::operator=(const MyStringVector& other) {
 }
 
 MyStringVector& MyStringVector::operator+=(const MyStringVector& other) {
-	// Precondition: none
-	// Postcondition: elements of other are appended to this vector, size is increased
+	// Precondition: other is a valid MyStringVector object, sufficient memory is available, capacity can be increased, if other.get_size() > 0 watch out for memory allocation
+	// Postcondition: elements of other are appended to this vector, size is increased, if necessary capacity is increased, other is unchanged, memory is allocated if necessary
 	for (size_t i = 0; i < other.size; ++i) {
 		push_back(other[i]);
 	}
