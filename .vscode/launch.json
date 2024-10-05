@@ -5,7 +5,7 @@
             "name": "(g++ Build and Debug active file)",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/Homework_01/MyStringVector.exe",
+            "program": "${workspaceFolder}/Homework_01/HW1_2023203093.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
