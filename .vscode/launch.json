@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(g++ Build and Debug active file)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/Homework_01/MyStringVector.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "miDebuggerPath": "C:/mingw/bin/gdb.exe",
+            "preLaunchTask": "C/C++: g++ build active file",
+            "internalConsoleOptions": "neverOpen",
+            //"console": "integratedTerminal"
+        }
+    ]
+}
