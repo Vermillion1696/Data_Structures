@@ -1,6 +1,15 @@
 #pragma once
 
+/*
 class MyStringVector {
+private:
+	string* str_data;
+	size_t str_size;
+	size_t str_capacity;
+
+	// Using bit-shift operations make the program much faster.
+	// As an example of bit-shift operation result, (1 << 20) means 2^19 (pow(2,19)).
+	size_t MAX_SIZE = (1 << 21);
 public:
 	// These are requested members to be implemented.
 	MyStringVector();
@@ -30,13 +39,6 @@ public:
 	void setSize(size_t n);
 	void setCapacity(size_t n);
 	void setData(string* data);
-
-private:
-	string* str_data;
-	size_t str_size;
-	size_t str_capacity;
-
-	// Using bit-shift operations make the program much faster.
-	// As an example of bit-shift operation result, (1 << 20) means 2^19 (pow(2,19)).
-	size_t MAX_SIZE = (1 << 21);
-};
+	
+*/
+//};

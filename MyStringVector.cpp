@@ -1,11 +1,13 @@
 #include <iostream>
+#include <string>
 #include <cstdlib>
 #include "MyStringVector.h"
 using namespace std;
 
+/*
 // ** Functions Related with Constructor and Destructor **
 MyStringVector::MyStringVector() {
-	str_data = nullptr;
+	str_data = new string[0];
 	str_size = 0;
 	str_capacity = 0;
 	return;
@@ -37,18 +39,8 @@ void MyStringVector::setSize(size_t n) {
 	return;
 }
 void MyStringVector::setData(string* data) {
-
-	// make this capable for adding the other MyStringVector
-	setCapacity(getCapacity() + other.getCapacity());
-
-	// precomputation for good readability
-	size_t other_size = other.getSize();
-	size_t this_size = getSize();
-
-	// add other's datas
-	for (size_t dir = this_size; dir < this_size + other_size; ++dir) {
-		str_data[dir] = other.str_data[dir - other_size];
-	}
+	str_data = data;
+	return;
 }
 
 // ** Functions Related with Capacity and Size **
@@ -161,7 +153,9 @@ MyStringVector& MyStringVector::operator+=(const MyStringVector& other) {
 string MyStringVector::operator[](const size_t index) {
 	return str_data[index];
 }
+*/
 
 int main() {
-
+	cout << "Hello, World!" << endl;
+	system("pause");
 }
