@@ -1,5 +1,4 @@
 #ifndef MYSTRINGVECTOR_H
-#include <string>
 
 class MyStringVector {
 private:
