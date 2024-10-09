@@ -1,3 +1,6 @@
+// 2023203093 김수오
+// HW1_2023203093.cpp
+
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -73,7 +76,6 @@ public:
 	// These functions test functions which are related to memory management.
 	void testShrinkToFit(MyStringVector& vec) {
 		try {
-			size_t old_capacity = vec.get_capacity();
 			vec.shrink_to_fit();
 			if (vec.get_capacity() == vec.get_size()) {
 				cout << "passed\n";
@@ -140,12 +142,15 @@ public:
 			cerr << "exception in pop_back: " << e.what() << "\n";
 		}
 	}
-	
+
 	// These functions test functions which are related to data status.
 	void testIsEmpty(MyStringVector& vec) {
 		try {
-			if (vec.is_empty()) {
-				cout << "passed\n";
+			if (vec.is_empty() && vec.get_size() == 0) {
+				cout << "passed: vector is empty and size is 0\n";
+			}
+			else if ((!vec.is_empty()) && vec.get_size() != 0) {
+				cout << "passed: vector is not empty and size is not 0\n";
 			}
 			else {
 				cerr << "failed: vector is not empty when expected to be empty\n";
@@ -355,6 +360,8 @@ int main() {
 	}
 
 	// !! Output Test !!
+	// 각 함수에 대한 출력을 테스트하는 코드를 추가했습니다.
+
 	{
 		cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 		cout << "          Output Test         " << endl;
@@ -365,6 +372,29 @@ int main() {
 			MyStringVector vec;
 			cout << "========== Default Constructor Output Test ==========" << endl;
 			cout << "Size: " << vec.get_size() << ", Capacity: " << vec.get_capacity() << endl;
+			cout << endl;
+		}
+
+		// Capacity Constructor Output Test
+		{
+			MyStringVector vec(5);
+			cout << "========== Capacity Constructor Output Test ==========" << endl;
+			cout << "Size: " << vec.get_size() << ", Capacity: " << vec.get_capacity() << endl;
+			cout << endl;
+		}
+
+		// Copy Constructor Output Test
+		{
+			MyStringVector originalVec;
+			originalVec.push_back("test1");
+			originalVec.push_back("test2");
+
+			MyStringVector copiedVec(originalVec);
+			cout << "========== Copy Constructor Output Test ==========" << endl;
+			cout << "Original Size: " << originalVec.get_size() << ", Copied Size: " << copiedVec.get_size() << endl;
+			cout << "Original Capacity: " << originalVec.get_capacity() << ", Copied Capacity: " << copiedVec.get_capacity() << endl;
+			cout << "Original Elements: " << originalVec[0] << ", " << originalVec[1] << endl;
+			cout << "Copied Elements: " << copiedVec[0] << ", " << copiedVec[1] << endl;
 			cout << endl;
 		}
 
@@ -380,12 +410,23 @@ int main() {
 			cout << endl;
 		}
 
+		// Reserve Output Test
+		{
+			MyStringVector vecForReserve;
+			vecForReserve.reserve(20);
+			cout << "========== Reserve Output Test ==========" << endl;
+			cout << "After reserve(20) -> Capacity: " << vecForReserve.get_capacity() << endl;
+			cout << endl;
+		}
+
 		// Push Back Output Test
 		{
 			MyStringVector vecForPushBack;
 			cout << "========== Push Back Output Test ==========" << endl;
 			vecForPushBack.push_back("hello");
+			vecForPushBack.push_back("world");
 			cout << "After push_back -> Size: " << vecForPushBack.get_size() << ", Capacity: " << vecForPushBack.get_capacity() << endl;
+			cout << "Elements: " << vecForPushBack[0] << ", " << vecForPushBack[1] << endl;
 			cout << endl;
 		}
 
@@ -451,6 +492,30 @@ int main() {
 			cout << "========== Assignment Operator Output Test ==========" << endl;
 			lhsVec = rhsVec;
 			cout << "LHS Size: " << lhsVec.get_size() << ", Capacity: " << lhsVec.get_capacity() << endl;
+			cout << "LHS Element: " << lhsVec[0] << endl;
+			cout << endl;
+		}
+
+		// Operator += Output Test
+		{
+			MyStringVector vec1, vec2;
+			vec1.push_back("data1");
+			vec2.push_back("data2");
+			cout << "========== Operator += Output Test ==========" << endl;
+			vec1 += vec2;
+			cout << "vec1 Size after += : " << vec1.get_size() << ", Capacity: " << vec1.get_capacity() << endl;
+			cout << "Elements: " << vec1[0] << ", " << vec1[1] << endl;
+			cout << endl;
+		}
+
+		// Operator[] Output Test
+		{
+			MyStringVector vecForIndexing;
+			vecForIndexing.push_back("first");
+			vecForIndexing.push_back("second");
+			cout << "========== Operator[] Output Test ==========" << endl;
+			cout << "vecForIndexing[0]: " << vecForIndexing[0] << endl;
+			cout << "vecForIndexing[1]: " << vecForIndexing[1] << endl;
 			cout << endl;
 		}
 	}
@@ -460,7 +525,7 @@ int main() {
 		cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 		cout << "        Additional Test       " << endl;
 		cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-		
+
 		// Chaining Assignment Test
 		{
 			MyStringVector vec1, vec2, vec3;
@@ -488,7 +553,8 @@ int main() {
 			vecForErrorTest.push_back("first");
 
 			// Accessing an invalid index (this will terminate the program)
-			cout << vecForErrorTest[5] << endl;  // This should cause an error message and terminate the program.
+			// cout << vecForErrorTest[5] << endl;  // This should cause an error message and terminate the program. 
+			// If you want to check the operator[] works, remove "//"
 
 			cout << endl;
 		}
